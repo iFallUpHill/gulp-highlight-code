@@ -1,6 +1,6 @@
 {
   "name": "gulp-highlight-code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pipe code snippets through highlight.js using gulp to pre-tag code blocks.",
   "main": "index.js",
   "scripts": {
