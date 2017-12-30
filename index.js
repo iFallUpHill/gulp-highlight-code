@@ -8,24 +8,44 @@ const through       = require('through2');
 const packageName   = require('./package.json').name;
 const defaultConfig = {
     selector: 'pre code',
-    ignoreClass: 'nohighlight',
+    ignoreClass: 'no-highlight',
     cheerio: {
         decodeEntities: false,
     }
 }
 
+const entityMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+}
+
+function escapeHTML (HTMLString) {
+    return String(HTMLString).replace(/[&<>"'`=\/]/g, s => entityMap[s]);
+}
+
 function highlight (text, config) {
     const $ = cheerio.load(text, config.cheerio);
+
     $(config.selector)
-        .not((i, el) => $(el).hasClass(config.ignoreClass))
         .each((i, el) => {
-            const codeBlock = $(el).html();
-            const language = $(el).attr('data-lang') ? $(el).attr('data-lang').toLower : '';
-            const result = (language && hljs.getLanguage(language))
-                ? hljs.highlight(language, codeBlock, true)
-                : hljs.highlightAuto(codeBlock);
-                
-            $(el).text(result.value).addClass('hljs');
+            if ($(el).hasClass(config.ignoreClass)) {
+                const originalCode = escapeHTML($(el).text());
+                $(el).text(originalCode).addClass('no-hljs');
+
+            } else {
+                const codeBlock = $(el).html();
+                const language = $(el).attr('data-lang') ? $(el).attr('data-lang').toLower : '';
+                const result = (language && hljs.getLanguage(language))
+                    ? hljs.highlight(language, codeBlock, true)
+                    : hljs.highlightAuto(codeBlock);
+                $(el).text(result.value).addClass('hljs');
+            }
         });
 
     return $.html() || text;
