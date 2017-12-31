@@ -40,7 +40,7 @@ function highlight (text, config) {
 
             } else {
                 const codeBlock = $(el).html();
-                const language = $(el).attr('data-lang') ? $(el).attr('data-lang').toLower : '';
+                const language = $(el).attr('data-lang') ? $(el).attr('data-lang').toLowerCase() : '';
                 const result = (language && hljs.getLanguage(language))
                     ? hljs.highlight(language, codeBlock, true)
                     : hljs.highlightAuto(codeBlock);
