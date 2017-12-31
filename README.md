@@ -6,7 +6,7 @@
 [Check it out on npm!](https://www.npmjs.com/package/gulp-highlight-code "gulp-highlight-code")
 
 ## About
-Pipe code snippets through `highlight.js` using `gulp` to pre-tag code blocks at compile time. This only applies to codeblocks formatted properly using both the `pre` and a `code` tags (i.e. `<pre><code>`).
+Pipe code snippets through [highlight.js](https://highlightjs.org/ "highlight.js")  using `gulp` to pre-tag code blocks at compile time. This only applies to codeblocks formatted properly using both the `pre` and a `code` tags (i.e. `<pre><code>`).
 
 `gulp-highlight-code` will try to automatically detect a codeblock's language. To improve the accuracy of gulp-highlight-code, add the `data-lang` HTML attribute to the `code` tag containing code block to specify the language.
 
