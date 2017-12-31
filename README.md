@@ -31,17 +31,26 @@ gulp.task('default', function () {
 ```
 
 ### src/index.html
+
 ```html
 <!-- Will be highlighted -->
 <pre><code data-lang="html">&lt;div&gt;
-	&lt;Highlighted&gt;
+	Highlighted
 &lt;div&gt;</code></pre>
 
 <!-- Will not be highlighted -->
 <pre><code data-lang="html" class="no-highlight">&lt;div&gt;
-	&lt;Not Highlighted&gt;
+	Not Highlighted
 &lt;div&gt;</code></pre>
 
 ```
 
-Note that you must use escaped HTML within the `<pre><code>` block.
+#### Notes
+
+* You must use escaped HTML within the `<pre><code>` block.
+
+* Code blocks that have been highlighted using highlight.js will have the `hljs` class added to them. Similarly, code blocks that were not highlighted will have the `no-hljs` class added to them.
+
+## Known Issues
+
+* No CSS is included. This is intentional as this library is only intended to pre-wrap code snippets within code blocks using highlight.js tags. You are required to define and include your own CSS.
