@@ -35,8 +35,7 @@ function highlight (text, config) {
     $(config.selector)
         .each((i, el) => {
             if ($(el).hasClass(config.ignoreClass)) {
-                const originalCode = escapeHTML($(el).text());
-                $(el).text(originalCode).addClass('no-hljs');
+                $(el).text(escapeHTML($(el).text())).addClass('no-hljs');
 
             } else {
                 const codeBlock = $(el).html();
